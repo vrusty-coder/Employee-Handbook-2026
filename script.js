@@ -1,4 +1,4 @@
-// Policy data (you can expand this later)
+// Policy data
 const policies = [
   {
     id: "culture",
@@ -163,7 +163,7 @@ function renderPolicies(filterText = "") {
 
   if (filtered.length === 0) {
     policyCardsContainer.innerHTML =
-      '<div style="grid-column:1/-1;color:#6b7280;">No matching policies found.</div>';
+      '<div style="grid-column:1/-1;color:#64748b;">No matching policies found.</div>';
     return;
   }
 
@@ -196,13 +196,13 @@ const closeModal = document.getElementById("closeModal");
 function openPolicyModal(policy) {
   modalTitle.textContent = policy.title;
   modalBody.innerHTML = `
-    <p style="margin-bottom:10px;color:#4b5563;">${policy.summary}</p>
+    <p style="margin-bottom:10px;color:#475569;">${policy.summary}</p>
     <ul style="margin-left:18px;">
       ${policy.points
         .map((pt) => `<li style="margin-bottom:6px;">${pt}</li>`)
         .join("")}
     </ul>
-    <p style="margin-top:14px;font-size:0.85rem;color:#6b7280;">
+    <p style="margin-top:14px;font-size:0.85rem;color:#647480;">
       This is a simplified summary. For exact wording and legal effect, refer to
       the official Employee Handbook and your Employment Agreement.
     </p>
@@ -221,9 +221,10 @@ modal.addEventListener("click", (e) => {
 });
 
 // Smooth scroll for quick actions
-document.querySelectorAll(".action-card").forEach((btn) => {
+document.querySelectorAll(".pill-btn, .action-card").forEach((btn) => {
   btn.addEventListener("click", () => {
     const id = btn.getAttribute("data-scroll");
+    if (!id) return;
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -231,7 +232,7 @@ document.querySelectorAll(".action-card").forEach((btn) => {
   });
 });
 
-// Simple leave calculator (naive: just counts calendar days)
+// Leave calculator
 const leaveStart = document.getElementById("leaveStart");
 const leaveEnd = document.getElementById("leaveEnd");
 const calcLeaveBtn = document.getElementById("calcLeaveBtn");
@@ -256,7 +257,7 @@ calcLeaveBtn.addEventListener("click", () => {
 
   leaveResult.textContent =
     `Approximate calendar days: ${diffDays}. ` +
-    `Actual leave days depend on weekends, holidays, and the sandwich rule. " +
+    `Actual leave days depend on weekends, holidays, and the sandwich rule. ` +
     `Confirm with HR for exact calculation.`;
 });
 
