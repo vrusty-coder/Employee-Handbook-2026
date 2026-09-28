@@ -1,1 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Address – Employee Handbook Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1>The Address – Employee Handbook</h1>
+      <p class="subtitle">Interactive policy dashboard</p>
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Search policies or ask a question (e.g. leave, travel, grievance)..."
+        class="search-input"
+      />
+    </div>
+  </header>
 
+  <main class="container">
+    <!-- Quick actions -->
+    <section class="quick-actions">
+      <h2>Quick actions</h2>
+      <div class="action-cards">
+        <button class="action-card" data-scroll="leave">
+          <div class="action-title">Leave planner</div>
+          <div class="action-desc">Check leave types, entitlements, sandwich rule</div>
+        </button>
+        <button class="action-card" data-scroll="travel">
+          <div class="action-title">Travel calculator</div>
+          <div class="action-desc">See hotel, food & travel limits by grade</div>
+        </button>
+        <button class="action-card" data-scroll="grievance">
+          <div class="action-title">Report a concern</div>
+          <div class="action-desc">Grievance & POSH reporting flow</div>
+        </button>
+        <button class="action-card" data-scroll="mediclaim">
+          <div class="action-title">Mediclaim guide</div>
+          <div class="action-desc">Coverage, eligibility & claims steps</div>
+        </button>
+      </div>
+    </section>
+
+    <!-- Policy cards -->
+    <section class="policies-section">
+      <h2>Explore policies</h2>
+      <div id="policyCards" class="policy-cards"></div>
+    </section>
+
+    <!-- Leave planner -->
+    <section id="leave" class="detail-section">
+      <h2>Leave planner</h2>
+      <div class="detail-card">
+        <h3>Your annual leave entitlement</h3>
+        <ul>
+          <li>Casual Leave (CL): 7 days</li>
+          <li>Sick Leave (SL): 7 days</li>
+          <li>Earned / Floater Leave (EL): 8 days</li>
+        </ul>
+        <p>
+          CL and SL lapse if not used in the calendar year. EL may be eligible
+          for encashment as per company policy and applicable law.
+        </p>
+
+        <h3>Sandwich leave rule</h3>
+        <p>
+          If you take leave on both sides of a weekly off, the intervening
+          weekly off is also counted as leave. Example: Leave on Friday and
+          Monday → Friday, Saturday, Sunday, Monday all counted as leave.
+        </p>
+
+        <h3>Simple leave calculator</h3>
+        <label>
+          Start date:
+          <input type="date" id="leaveStart" />
+        </label>
+        <label>
+          End date:
+          <input type="date" id="leaveEnd" />
+        </label>
+        <button id="calcLeaveBtn" class="btn">Calculate leave days</button>
+        <div id="leaveResult" class="result-box"></div>
+      </div>
+    </section>
+
+    <!-- Travel calculator -->
+    <section id="travel" class="detail-section">
+      <h2>Travel entitlement calculator</h2>
+      <div class="detail-card">
+        <label>
+          Select your grade:
+          <select id="travelGrade">
+            <option value="G1">G1 – Entry & Intermediate</option>
+            <option value="G2">G2 – Senior</option>
+            <option value="G3">G3 – Managerial</option>
+            <option value="G4">G4 – Leadership</option>
+          </select>
+        </label>
+        <button id="calcTravelBtn" class="btn">Show my entitlements</button>
+        <div id="travelResult" class="result-box"></div>
+
+        <h3>How to book travel</h3>
+        <ul>
+          <li>All bookings must be done via Travel Desk only.</li>
+          <li>
+            Email:
+            <a href="mailto:traveldesk@gototheaddress.com"
+              >traveldesk@gototheaddress.com</a
+            >
+          </li>
+          <li>
+            Include: date of travel, time, destination, duration, purpose.
+          </li>
+          <li>Independent bookings are not eligible for reimbursement.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Grievance & POSH -->
+    <section id="grievance" class="detail-section">
+      <h2>Report a concern (Grievance & POSH)</h2>
+      <div class="detail-card">
+        <h3>Grievance redressal – steps</h3>
+        <ol>
+          <li>Discuss with your Reporting Manager (if appropriate).</li>
+          <li>If unresolved or involves your manager, write to HR.</li>
+          <li>If still unresolved, escalate to Senior Management.</li>
+        </ol>
+        <p>
+          Include: your name & ID, department, date(s), description, any
+          evidence, and desired resolution.
+        </p>
+
+        <h3>POSH (Prevention of Sexual Harassment)</h3>
+        <ul>
+          <li>Complaints go to the Internal Committee (IC).</li>
+          <li>
+            Time limit: within 3 months from the incident (or last incident).
+          </li>
+          <li>Complaint can be sent by email to any IC member.</li>
+          <li>Confidentiality and protection against retaliation apply.</li>
+        </ul>
+        <p>
+          For exact IC member names and contacts, check the official notice or
+          contact HR.
+        </p>
+      </div>
+    </section>
+
+    <!-- Mediclaim -->
+    <section id="mediclaim" class="detail-section">
+      <h2>Mediclaim guide</h2>
+      <div class="detail-card">
+        <ul>
+          <li>Coverage: up to INR 2,00,000 per employee per policy year.</li>
+          <li>Eligibility: after probation, for permanent employees.</li>
+          <li>Covers: hospitalization, surgeries, diagnostics (as per policy).</li>
+          <li>
+            Claims: follow insurer process; inform HR within 24 hours of
+            hospitalization/treatment.
+          </li>
+        </ul>
+        <p>
+          Coverage ends when employment ends. Company may change provider or
+          terms with notice.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal for policy details -->
+  <div id="policyModal" class="modal">
+    <div class="modal-content">
+      <button id="closeModal" class="close-btn">&times;</button>
+      <h2 id="modalTitle"></h2>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
